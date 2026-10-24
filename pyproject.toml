@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "taxieta"
+version = "1.0.0"
+description = "Prédiction de la durée des courses de taxi new-yorkaises, avec inférence distribuée Dask"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "joblib>=1.3",
+    "pyarrow>=14.0",
+]
+
+[project.optional-dependencies]
+distributed = ["dask[distributed]>=2024.1"]
+dev = ["pytest>=7.4", "dask[distributed]>=2024.1"]
+
+[project.scripts]
+taxieta = "taxieta.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
